@@ -12,6 +12,9 @@ import { ThemeContext } from './contexts/ThemeContext'
 import { AuthContext } from './contexts/AuthContext';
 import SignupForm from './Reducer/SignupForm';
 import CartReducer from './Reducer/CartReducer';
+import BuggyComponent from './ErrorBoundary/BuggyComponent';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Home from './components/Home';
 // import CounterReducer from './Reducer/CounterReducer';
 
 
@@ -58,8 +61,12 @@ function App() {
 
   return (
     <div className="App">
+      <Home />
       {/* <SignupForm /> */}
-      <CartReducer />
+      {/* <CartReducer /> */}
+      {/* <ErrorBoundary>
+        <BuggyComponent />
+      </ErrorBoundary> */}
       {/* <Child name={name} />
       {count}
       <button onClick={increment}>+</button> */}
