@@ -15,13 +15,18 @@ import CartReducer from './Reducer/CartReducer';
 import BuggyComponent from './ErrorBoundary/BuggyComponent';
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import Home from './components/Home';
+import UserProfile from './testing/UserProfile';
+import LoginForm from './testing/LoginForm';
+import { ThemeProvider } from './testing/context/ThemeContext';
+import ThemeToggler from './testing/context/ThemeToggler';
+import CurrentTheme from './testing/context/CurrentTheme';
 // import CounterReducer from './Reducer/CounterReducer';
 
 
-const userData = {
-  name: "manu",
-  age: 30
-}
+// const userData = {
+//   name: "manu",
+//   age: 30
+// }
 function App() {
   // const { theme, toggleTheme } = useContext(ThemeContext); // ✅ This will now work
   // const { user, login, logout } = useContext(AuthContext)
@@ -61,7 +66,14 @@ function App() {
 
   return (
     <div className="App">
-      <Home />
+      {/* <Home /> */}
+      {/* <UserProfile  /> */}
+      {/* <ThemeProvider>
+        <ThemeToggler />
+        <CurrentTheme />
+      </ThemeProvider> */}
+
+      {/* <LoginForm /> */}
       {/* <SignupForm /> */}
       {/* <CartReducer /> */}
       {/* <ErrorBoundary>
