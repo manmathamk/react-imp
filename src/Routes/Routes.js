@@ -48,9 +48,8 @@ function RoutesMain() {
                     {/* <Route path="/user/:userId" element={<UserProfile />} /> */}
 
                     {/* 4. Protected Routing with wrapper component */}
-                    {/* <Route element={<RequireAuth isLoggedIn={isLoggedIn} />}>
-            <Route path="/profile" element={<Profile />} />
-          </Route> */}
+                    
+                    
 
                     {/* 5. Dashboard with Nested Routes */}
                     {/* <Route path="/dashboard" element={<DashboardLayout />}> */}
