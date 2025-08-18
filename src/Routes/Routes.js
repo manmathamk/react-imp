@@ -1,5 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, useParams, Outlet, useSearchParams, Link } from "react-router-dom";
+import withAuth from "../higherOrderComponents/withAuth";
+import Home from "../components/Home";
 
 // Lazy-loaded component
 const LazyAbout = lazy(() => import("./About"));
@@ -48,8 +50,8 @@ function RoutesMain() {
                     {/* <Route path="/user/:userId" element={<UserProfile />} /> */}
 
                     {/* 4. Protected Routing with wrapper component */}
-                    
-                    
+
+
 
                     {/* 5. Dashboard with Nested Routes */}
                     {/* <Route path="/dashboard" element={<DashboardLayout />}> */}
@@ -68,6 +70,8 @@ function RoutesMain() {
 
                     {/* 10. 404 / Catch-all */}
                     {/* <Route path="*" element={<NotFound />} /> */}
+
+                    <Route path="/dashboard" element={withAuth(Home)()} />
                 </Routes>
             </Suspense>
         </Router>
