@@ -1,17 +1,19 @@
+// src/hoc/withLoader.js
 import React from "react";
 
 const withLoader = (WrappedComponent, LoaderUI = null) => {
-    return function LoaderWrapper(props) {
-        const { data, loading } = props
+  return function LoaderWrapper(props) {
+    const { data, loading } = props;
 
-        if (loading) {
-            return (
-                LoaderUI || (
-                    <div style={{ textAlign: "center", padding: "20px" }}>
-                        <div className="spinner" />
-                        <p>Loading...</p>
-                        <style>
-                            {`
+    // Show loader
+    if (loading) {
+      return (
+        LoaderUI || (
+          <div style={{ textAlign: "center", padding: "20px" }}>
+            <div className="spinner" />
+            <p>Loading...</p>
+            <style>
+              {`
                 .spinner {
                   border: 4px solid #f3f3f3;
                   border-top: 4px solid #3498db;
@@ -26,26 +28,47 @@ const withLoader = (WrappedComponent, LoaderUI = null) => {
                   100% { transform: rotate(360deg); }
                 }
               `}
-                        </style>
-                    </div>
-                )
-            )
-        }
-
-        if (!data || (Array.isArray(data) && data.length === 0)) {
-            return <p style={{ textAlign: "center" }}>No data available</p>;
-        }
-        return <WrappedComponent {...props} />
+            </style>
+          </div>
+        )
+      );
     }
-}
 
-export default withLoader
+    // No data
+    if (!data || (Array.isArray(data) && data.length === 0)) {
+      return <p style={{ textAlign: "center" }}>No data available</p>;
+    }
 
+    // Render wrapped component
+    return <WrappedComponent {...props} />;
+  };
+};
 
-// App.js
+export default withLoader;
+
+// -------------------------------------------------------------------------------
+
+// src/components/UserList.js
+// import React from "react";
+
+// const UserList = ({ data }) => {
+//   return (
+//     <ul>
+//       {data.map((user) => (
+//         <li key={user.id}>{user.name}</li>
+//       ))}
+//     </ul>
+//   );
+// };
+
+// export default UserList;
+
+// ---------------------------------------------------------------------------------
+
+// src/App.js
 // import React, { useEffect, useState } from "react";
-// import withLoader from "./withLoader";
-// import UserList from "./UserList";
+// import withLoader from "./hoc/withLoader";
+// import UserList from "./components/UserList";
 
 // const UserListWithLoader = withLoader(UserList);
 
@@ -54,17 +77,18 @@ export default withLoader
 //   const [users, setUsers] = useState([]);
 
 //   useEffect(() => {
+//     // Simulating API call
 //     setTimeout(() => {
 //       setUsers([
 //         { id: 1, name: "Alice" },
 //         { id: 2, name: "Bob" },
 //       ]);
 //       setLoading(false);
-//     }, 2000); // fake API delay
+//     }, 2000);
 //   }, []);
 
 //   return (
-//     <div>
+//     <div style={{ padding: "20px" }}>
 //       <h1>Users</h1>
 //       <UserListWithLoader data={users} loading={loading} />
 //     </div>

@@ -1,42 +1,88 @@
-import React, { useEffect, useRef, useState } from 'react'
+// src/hooks/useFetch.js
+import { useEffect, useRef, useState } from "react";
 
-const useFetch = (url) => {
-    const [data, setData] = useState(null)
-    const [loading, setLoading] = useState(false)
-    const [error, seterror] = useState(null)
-    const fetchOnceRef = useRef(false)
+const useFetch = (url, options = {}) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const fetchOnceRef = useRef(false);
 
-    const fetchData = async () => {
-        setLoading(true)
-        seterror(null)
-        try {
-            const response = await fetch(url)
-            if (!response.ok) {
-                seterror(response.status)
-                setLoading(false)
-                throw new Error(`HTTP Error Status: ${response.status}`)
+  const fetchData = async () => {
+    setLoading(true);
+    setError(null);
 
-            }
-            const data = await response.json()
-            // console.log("data---------------------", data)
-            setLoading(false)
-            setData(data)
-        } catch (error) {
-            seterror(error)
-            setLoading(false)
-            console.error("Got some Error:", error)
-        }
+    try {
+      const response = await fetch(url, options);
+
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}`);
+      }
+
+      const result = await response.json();
+      setData(result);
+    } catch (err) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
     }
+  };
 
-    useEffect(() => {
-        if (!fetchOnceRef.current) {
-            fetchData()
-            fetchOnceRef.current = true
-        }
+  useEffect(() => {
+    if (!fetchOnceRef.current) {
+      fetchData();
+      fetchOnceRef.current = true; // ensures one-time fetch
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url]);
 
-    }, [url])
+  return { data, loading, error, refetch: fetchData };
+};
 
-    return [data, loading, error]
-}
+export default useFetch;
 
-export default useFetch
+// -----------------------------------------------------------------------------------
+
+// src/components/UserList.js
+// import React from "react";
+// import useFetch from "../hooks/useFetch";
+
+// const UserList = () => {
+//   const { data, loading, error, refetch } = useFetch(
+//     "https://jsonplaceholder.typicode.com/users"
+//   );
+
+//   if (loading) return <p>Loading...</p>;
+//   if (error) return <p style={{ color: "red" }}>❌ {error}</p>;
+
+//   return (
+//     <div>
+//       <h2>User List</h2>
+//       <button onClick={refetch}>🔄 Refresh</button>
+//       <ul>
+//         {data?.map((user) => (
+//           <li key={user.id}>
+//             {user.name} ({user.email})
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// };
+
+// export default UserList;
+
+// -------------------------------------------------------------------------------
+
+// import React from "react";
+// import UserList from "./components/UserList";
+
+// function App() {
+//   return (
+//     <div style={{ padding: "20px" }}>
+//       <h1>useFetch Hook Example</h1>
+//       <UserList />
+//     </div>
+//   );
+// }
+
+// export default App;

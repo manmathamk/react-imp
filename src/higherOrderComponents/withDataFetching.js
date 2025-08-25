@@ -1,60 +1,80 @@
+// src/hoc/withDataFetching.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const withDataFetching = (wrappedComponent, endpoint) => {
-    return function DataFetchingWrapper(props) {
-        const [data, setData] = useState([])
-        const [loading, setLoading] = useState(true)
-        const [error, setError] = useState(null)
+const withDataFetching = (WrappedComponent, endpoint) => {
+  return function DataFetchingWrapper(props) {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-        useEffect(() => {
-            let isMounted = true;
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
 
-            setLoading(true)
+      try {
+        const response = await axios.get(endpoint);
+        setData(response.data);
+      } catch (err) {
+        setError(err.message || "Something went wrong");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-            axios.get(endpoint)
-                .then((res) => {
-                    if (isMounted) {
-                        setData(res.data)
-                        setLoading(false)
-                    }
-                })
-                .catch(err => {
-                    if (isMounted) {
-                        setError(err.message || "Something went wrong")
-                    }
-                })
+    useEffect(() => {
+      let isMounted = true;
 
-            return () => {
-                isMounted = false
-            }
+      fetchData();
 
-        }, [endpoint])
+      return () => {
+        isMounted = false;
+      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [endpoint]);
 
-        return <wrappedComponent {...props} data={data} error={error} loading={loading} />
-    }
-}
+    return (
+      <WrappedComponent
+        {...props}
+        data={data}
+        error={error}
+        loading={loading}
+        refetch={fetchData} // ✅ extra option for retry
+      />
+    );
+  };
+};
 
-export default withDataFetching
+export default withDataFetching;
 
 
-// App.js
+
+// ------------------------------------------------------------------------
+
+// src/pages/UserList.js
 // import React from "react";
-// import withDataFetching from "./withDataFetching";
-// import PostList from "./PostList";
+// import withDataFetching from "../hoc/withDataFetching";
 
-// const PostListWithData = withDataFetching(
-//   PostList,
-//   "https://jsonplaceholder.typicode.com/posts"
-// );
+// const UserList = ({ data, loading, error, refetch }) => {
+//   if (loading) return <p>Loading users...</p>;
+//   if (error)
+//     return (
+//       <div>
+//         <p style={{ color: "red" }}>{error}</p>
+//         <button onClick={refetch}>Retry</button>
+//       </div>
+//     );
 
-// function App() {
 //   return (
-//     <div>
-//       <h1>Posts</h1>
-//       <PostListWithData />
-//     </div>
+//     <ul>
+//       {data.map((user) => (
+//         <li key={user.id}>
+//           {user.name} ({user.email})
+//         </li>
+//       ))}
+//     </ul>
 //   );
-// }
+// };
 
-// export default App;
+// export default withDataFetching(UserList, "https://jsonplaceholder.typicode.com/users");
+
