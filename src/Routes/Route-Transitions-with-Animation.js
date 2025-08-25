@@ -35,7 +35,7 @@ function AnimatedRoutes() {
   );
 }
 
-export default function App() {
+export default function RoutesTransitions() {
   return (
     <Router>
       <nav style={{ display: "flex", gap: "1rem" }}>

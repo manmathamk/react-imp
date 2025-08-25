@@ -6,7 +6,6 @@ import useDeounce from './hooks/useDebounce';
 import useThrottle from './hooks/useThrottle';
 import useLocalStorage from './hooks/useLocalStorage';
 import Child from './components/Child';
-import ValidationForm from './validations/FormValidations';
 import { useContext } from 'react';
 import { ThemeContext } from './contexts/ThemeContext'
 import { AuthContext } from './contexts/AuthContext';
@@ -20,6 +19,13 @@ import LoginForm from './testing/LoginForm';
 import { ThemeProvider } from './testing/context/ThemeContext';
 import ThemeToggler from './testing/context/ThemeToggler';
 import CurrentTheme from './testing/context/CurrentTheme';
+import BasicRotuing from './Routes/Basic-Routing';
+import DynamicRouting from './Routes/Dynamic-Routing-with-Params';
+import IndexRoutes from './Routes/Index-Routes';
+import LazyLoading from './Routes/Lazy-Loading-Routes-with-React.lazy';
+import MultipleLayuts from './Routes/Multiple-Layouts';
+import Nested from './Routes/Nested-Routing';
+import NotFound404 from './Routes/Not-Found-Route-404';
 // import CounterReducer from './Reducer/CounterReducer';
 
 
@@ -66,6 +72,7 @@ function App() {
 
   return (
     <div className="App">
+      <NotFound404 />
       {/* <Home /> */}
       {/* <UserProfile  /> */}
       {/* <ThemeProvider>

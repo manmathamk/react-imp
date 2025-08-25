@@ -9,17 +9,7 @@ const TeamPage = React.lazy(() => import('./Team'));
 
 const Home = () => {
     return (
-        <Router>
-            <Suspense fallback={<div>Loading...</div>}>
-                <Routes>
-                    <Route path="/about" element={<AboutPage />}>
-                        <Route path="team" element={<TeamPage />} />
-                        <Route path="company" element={<CompanyPage />} />
-                        <Route path="dashboard" element={<DashboardPage />} />
-                    </Route>
-                </Routes>
-            </Suspense>
-        </Router>
+        <h1>home</h1>
     );
 };
 

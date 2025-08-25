@@ -46,7 +46,7 @@ function DashboardSettings() {
   return <h2>Dashboard Settings</h2>;
 }
 
-export default function App() {
+export default function MultipleLayuts() {
   return (
     <Router>
       <Routes>

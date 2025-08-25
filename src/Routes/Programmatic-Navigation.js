@@ -21,7 +21,7 @@ function Dashboard() {
   return <h2>Dashboard Page</h2>;
 }
 
-export default function App() {
+export default function ProgramaticNavigation() {
   return (
     <Router>
       <Routes>

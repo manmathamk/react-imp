@@ -25,7 +25,7 @@ function ProtectedRoute({ auth, children }) {
   return auth ? children : <Navigate to="/login" replace />;
 }
 
-export default function App() {
+export default function Protexcted() {
   const [auth, setAuth] = useState(false);
 
   return (

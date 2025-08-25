@@ -26,7 +26,7 @@ function Authors() {
   return <h2>Blog Authors</h2>;
 }
 
-export default function App() {
+export default function IndexRoutes() {
   return (
     <Router>
       <Routes>

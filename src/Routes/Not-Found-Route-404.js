@@ -11,7 +11,7 @@ function NotFound() {
   return <h2>404 - Page Not Found</h2>;
 }
 
-export default function App() {
+export default function NotFound404() {
   return (
     <Router>
       <nav style={{ display: "flex", gap: "1rem" }}>

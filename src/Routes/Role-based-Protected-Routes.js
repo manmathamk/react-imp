@@ -25,7 +25,7 @@ function RoleProtectedRoute({ role, allowedRole, children }) {
   return role === allowedRole ? children : <Navigate to="/login" replace />;
 }
 
-export default function App() {
+export default function RolebasedRoutes() {
   const [role, setRole] = useState(null);
 
   return (

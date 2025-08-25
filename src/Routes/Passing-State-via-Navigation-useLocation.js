@@ -46,7 +46,7 @@ function Details() {
   );
 }
 
-export default function App() {
+export default function PassStateviaNavigation() {
   return (
     <Router>
       <Routes>

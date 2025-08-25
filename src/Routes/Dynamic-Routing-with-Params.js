@@ -37,7 +37,7 @@ function UserDetails() {
   );
 }
 
-export default function App() {
+export default function DynamicRouting() {
   return (
     <Router>
       <Routes>

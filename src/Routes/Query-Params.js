@@ -22,7 +22,7 @@ function Products() {
   );
 }
 
-export default function App() {
+export default function QueryParams() {
   return (
     <Router>
       <nav style={{ display: "flex", gap: "1rem" }}>

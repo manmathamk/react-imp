@@ -13,7 +13,7 @@ function Contact() {
   return <h1>Contact Page</h1>;
 }
 
-function App() {
+function BasicRotuing() {
   return (
     <Router>
       <nav style={{ display: "flex", gap: "1rem" }}>
@@ -31,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default BasicRotuing;

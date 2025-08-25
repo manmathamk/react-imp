@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
 
 // Lazy imports
-const Home = lazy(() => import("./pages/Home"));
-const About = lazy(() => import("./pages/About"));
-const Contact = lazy(() => import("./pages/Contact"));
+const Home = lazy(() => import("../components/Home"));
+const About = lazy(() => import("../components/About"));
+const Contact = lazy(() => import("../components/Company"));
 
-export default function App() {
+export default function LazyLoading() {
   return (
     <Router>
       <nav style={{ display: "flex", gap: "1rem" }}>

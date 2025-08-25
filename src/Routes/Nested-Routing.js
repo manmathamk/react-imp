@@ -30,7 +30,7 @@ function Settings() {
   return <h3>Settings Page</h3>;
 }
 
-export default function App() {
+export default function Nested() {
   return (
     <Router>
       <Routes>
