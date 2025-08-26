@@ -1,14 +1,12 @@
 // AuthContext.js
-import React, { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext } from "react";
 
-// Create Context
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
-// Provider Component
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const login = (userData) => setUser(userData);
+  const login = (name) => setUser(name);
   const logout = () => setUser(null);
 
   return (
@@ -18,7 +16,7 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook for easier usage
+// Custom hook
 export const useAuth = () => {
   return useContext(AuthContext);
 };
@@ -26,41 +24,34 @@ export const useAuth = () => {
 export default AuthProvider;
 
 
-// --------------------------------------
+// Parent.js
+// import AuthProvider from "./AuthContext";
+// import Child from "./Child";
 
-// App.js
-// import React from "react";
-// import AuthProvider, { useAuth } from "./AuthContext";
-
-// const Profile = () => {
-//   const { user, login, logout } = useAuth();
-
-//   return (
-//     <div>
-//       {user ? (
-//         <>
-//           <h2>Welcome, {user.name} 👋</h2>
-//           <button onClick={logout}>Logout</button>
-//         </>
-//       ) : (
-//         <button onClick={() => login({ name: "Manu", email: "manu@test.com" })}>
-//           Login
-//         </button>
-//       )}
-//     </div>
-//   );
-// };
-
-// const App = () => {
+// const Parent = () => {
 //   return (
 //     <AuthProvider>
-//       <h1>Auth Context Example</h1>
-//       <Profile />
+//       <Child />
 //     </AuthProvider>
 //   );
 // };
 
-// export default App;
+// export default Parent;
 
+// Child.js
+// import { useAuth } from "./AuthContext";
 
-// --------------------------------------------------------------------
+// const Child = () => {
+//   const { user, login, logout } = useAuth();
+
+//   return (
+//     <div>
+//       <p>User: {user ? user : "No user logged in"}</p>
+//       <button onClick={() => login("Manu")}>Login</button>
+//       <button onClick={logout}>Logout</button>
+//     </div>
+//   );
+// };
+
+// export default Child;
+

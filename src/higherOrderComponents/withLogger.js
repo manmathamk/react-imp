@@ -1,63 +1,54 @@
 // src/hoc/withLogger.js
 import React, { useEffect } from "react";
 
-const withLogger = (WrappedComponent, options = { trackClicks: false }) => {
-  return function LoggerWrapper(props) {
+const withLogger = (WrappedComponent, { trackClicks = false } = {}) => {
+  return (props) => {
     useEffect(() => {
       console.log(`[logger] ${WrappedComponent.name} mounted`);
-
       return () => console.log(`[logger] ${WrappedComponent.name} unmounted`);
     }, []);
 
     const handleClick = (e) => {
-      if (options.trackClicks) {
-        console.log(
-          `[logger] click event in ${WrappedComponent.name}`,
-          e.target
-        );
+      if (trackClicks) {
+        console.log(`[logger] click in ${WrappedComponent.name}`, e.target);
       }
-
-      // Call original onClick if present
-      if (props.onClick) props.onClick(e);
+      props.onClick?.(e); // call original handler if exists
     };
 
-    // Override onClick only if tracking clicks
-    const newProps = options.trackClicks
-      ? { ...props, onClick: handleClick }
-      : props;
-
-    return <WrappedComponent {...newProps} />;
+    return (
+      <WrappedComponent
+        {...props}
+        onClick={trackClicks ? handleClick : props.onClick}
+      />
+    );
   };
 };
 
 export default withLogger;
 
-// ------------------------------------------------------------------------
+
 
 // src/components/Button.js
 // import React from "react";
 
-// const Button = ({ onClick, children }) => {
-//   return (
-//     <button
-//       style={{ padding: "10px 20px", margin: "5px", cursor: "pointer" }}
-//       onClick={onClick}
-//     >
-//       {children}
-//     </button>
-//   );
-// };
+// const Button = ({ onClick, children }) => (
+//   <button
+//     style={{ padding: "10px 20px", margin: "5px", cursor: "pointer" }}
+//     onClick={onClick}
+//   >
+//     {children}
+//   </button>
+// );
 
 // export default Button;
 
-// ------------------------------------------------------------------------------
 
 // src/App.js
 // import React from "react";
 // import withLogger from "./hoc/withLogger";
 // import Button from "./components/Button";
 
-// // Wrapped with logging + click tracking
+// // Wrap Button with logger + click tracking
 // const LoggedButton = withLogger(Button, { trackClicks: true });
 
 // function App() {

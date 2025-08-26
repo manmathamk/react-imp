@@ -34,40 +34,14 @@ import NotFound404 from './Routes/Not-Found-Route-404';
 //   age: 30
 // }
 function App() {
-  // const { theme, toggleTheme } = useContext(ThemeContext); // ✅ This will now work
-  // const { user, login, logout } = useContext(AuthContext)
 
-  // const [name, setName] = useState("manu")
-  // const [count, setCount] = useState(0)
-  // const increment = useCallback(() => {
-  //   setCount(prev => prev + 1)
-  // }, [name])
-  // const [theme, setTheme] = useLocalStorage("theme", "light");
-  // useFetch Hook
-  // const [data, loading, error] = useFetch('https://jsonplaceholder.typicode.com/users')
-  // const [apiData, setApiData] = useState([])
-  // useEffect(() => {
-  //   if (data) {
-  //     setApiData(data);
-  //     console.log(data);
-  //   }
-  // }, [data]);
+  const [name, setName] = useState("manu")
+  const [count, setCount] = useState(0)
+  const increment = useCallback(() => {
+    setCount(prev => prev + 1)
+  }, [name])
 
-  // if (loading) return <p>Loading....</p>
-  // if (error) return <p>Error: {error}</p>
-  // useFetch Hook
-  // usedebounce
-  // const handleChange = useDeounce((e) => {
-  //   console.log('Debounced input:', e.target.value);
-  // }, 3000)
-  // const handleConsole = useThrottle(() => {
-  //   console.log('clicked at', new Date().toLocaleTimeString());
-  // }, 1000);
-
-  // const toggleTheme = () => {
-  //   setTheme((prev) => (prev === "light" ? "dark" : "light"));
-  // };
-
+  
 
 
   return (
