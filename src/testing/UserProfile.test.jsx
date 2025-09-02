@@ -42,3 +42,18 @@ describe("<UserProfile />", () => {
 
 
 });
+
+
+// - We call jest.resetAllMocks() in beforeEach() to reset fetch mocks before every test.
+// - In the first test (loading state):
+//   • We render <UserProfile />.
+//   • We assert with expect(...).toBeInTheDocument() that "Loading" text is shown initially.
+// - In the second test (success state):
+//   • We mock global.fetch to resolve successfully with a user object { name: "John Doe" }.
+//   • We render <UserProfile />.
+//   • We use screen.findByText() to asynchronously wait for "John Doe" to appear.
+//   • We assert the "Loading" text is removed using queryByText().
+// - In the third test (failure state):
+//   • We mock global.fetch to reject with an error ("API Error").
+//   • We render <UserProfile />.
+//   • We use screen.findByText() to assert that the error message "Error loading user data" is displayed.

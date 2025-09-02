@@ -1,12 +1,27 @@
-export const fetchUsers = () => async (dispatch) => {
-  dispatch({ type: "FETCH_USERS_LOADING" });
+export const fetchUsers = () => {
+  return async (dispatch) => {
+    const controller = new AbortController();
+    const signal = controller.signal;
 
-  try {
-    const res = await fetch("https://jsonplaceholder.typicode.com/users");
-    const data = await res.json();
+    dispatch({ type: "FETCH_USERS_LOADING" });
 
-    dispatch({ type: "FETCH_USERS_SUCCESS", payload: data });
-  } catch (error) {
-    dispatch({ type: "FETCH_USERS_FAILURE", payload: error.message });
-  }
+    try {
+      const res = await fetch("https://jsonplaceholder.typicode.com/users", {
+        signal,
+      });
+      const data = await res.json();
+
+      dispatch({ type: "FETCH_USERS_SUCCESS", payload: data });
+    } catch (error) {
+      // If aborted, skip dispatching failure
+      if (error.name === "AbortError") {
+        console.log("Fetch aborted");
+        return;
+      }
+      dispatch({ type: "FETCH_USERS_FAILURE", payload: error.message });
+    }
+
+    // Return a way to abort from the caller
+    return () => controller.abort();
+  };
 };

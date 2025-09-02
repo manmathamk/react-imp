@@ -42,3 +42,20 @@ describe("Navigation with React Router", () => {
     expect(screen.getByText(/about us/i)).toBeInTheDocument();
   });
 });
+
+
+// - We use render() with MemoryRouter to simulate routing in a test environment 
+//   (MemoryRouter lets us define initialEntries for the starting URL).
+// - In the first test:
+//   • We start at "/" and render the App.
+//   • We use expect(...).toBeInTheDocument() to assert the Home page text "Welcome Home" is visible.
+// - In the second test:
+//   • We set up userEvent for simulating real user actions.
+//   • We render App inside MemoryRouter starting at "/".
+//   • We use user.click() on the "About" link.
+//   • We assert with expect(...).toBeInTheDocument() that the "About Us" text appears.
+// - In the third test:
+//   • We again simulate a user clicking the "About" link.
+//   • Instead of checking window.location (not available in MemoryRouter),
+//     we assert that the rendered content "About Us" confirms the URL changed.
+

@@ -7,7 +7,7 @@ import CurrentTheme from "./CurrentTheme";
 
 describe("Theme context interaction", () => {
   test("default theme is light, toggles to dark and back to light", async () => {
-    
+
 
     render(
       <ThemeProvider>
@@ -28,3 +28,8 @@ describe("Theme context interaction", () => {
     expect(screen.getByText(/current theme: light/i)).toBeInTheDocument();
   });
 });
+
+
+// We use render() to mount the components inside ThemeProvider, screen.getByText() / screen.getByRole() to query elements, 
+// fireEvent.click() to simulate button clicks, and expect(...).toBeInTheDocument() to assert the text changes from "light" → "dark" → "light", 
+// confirming the context and toggler work.

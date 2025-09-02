@@ -12,3 +12,10 @@ describe("<Greeting />", () => {
         expect(screen.getByRole("heading")).toHaveTextContent("Hello Manu!")
     })
 })
+
+// - We use render() to mount the Greeting component.  
+// - We use screen.getByRole("heading") to query the heading element.  
+// - We use expect(...).toHaveTextContent() to assert the text content:  
+//     • "Hello Guest!" when no name is passed  
+//     • "Hello Manu!" when "Manu" is passed  
+// - This verifies that the component correctly renders props.

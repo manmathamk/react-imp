@@ -37,3 +37,19 @@ describe('<Loginform />', () => {
         })
     })
 })
+
+
+// - We use render() to mount the LoginForm component with a mock handleSubmit function.
+// - In the first test:
+//   • We query the "Login" button using screen.getByRole().
+//   • We use expect(...).toBeDisabled() to assert it is disabled on initial render.
+// - In the second test:
+//   • We use fireEvent.change() to fill in both the email and password fields.
+//   • We assert with expect(...).toBeEnabled() that the button becomes enabled.
+// - In the third test:
+//   • We create a mock function using jest.fn() and pass it as handleSubmit.
+//   • We fill in both input fields using fireEvent.change().
+//   • We simulate a click with fireEvent.click().
+//   • We assert with expect(mockTest).toHaveBeenCalledTimes(1) that submit was called once.
+//   • We assert with expect(mockTest).toHaveBeenCalledWith({ email, password }) 
+//     that the correct values were passed.
